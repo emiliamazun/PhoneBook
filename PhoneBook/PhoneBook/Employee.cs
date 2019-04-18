@@ -1,8 +1,12 @@
-﻿namespace PhoneBook
+﻿namespace Employee
 {
+    using PhoneBook;
+    using System;
+    using System.Collections.Generic;
+
     public class Employee
     {
-        public Employee(string name, string surname, string badgeID, string department, string internalPhone)
+        public Employee(string name, string surname, int badgeID, Location department, string internalPhone)
         {
             this.Name = name;
             this.Surname = surname;
@@ -15,9 +19,9 @@
 
         public string Surname { get; }
 
-        public string BadgeID { get; }
+        public int BadgeID { get; }
 
-        public string Department { get; }
+        public Location Department { get; }
 
         public string InternalPhone { get; }
 
@@ -30,5 +34,6 @@
         {
             return $"{Name} {Surname} {BadgeID} {Department} {InternalPhone}";
         }
+
     }
 }
