@@ -40,5 +40,26 @@
             var employeeFullData = employee.Name + " " + employee.SurName + " " + employee.BadgeID.ToString() + " " + employee.Department + " " + employee.InternalPhone;
             Assert.That(employee.PrintFullInfo(), Is.EqualTo(employeeFullData));
         }
+
+        [Test]
+        public void PhoneBook_Add_Employees()
+        {
+            var employee = new Employee("Bartek", "En", 123, Departments.Koszalin, "00-4567");
+            var employee2 = new Employee("Ania", "Zar", 456, Departments.Wroclaw, "00-1597");
+            var employee3 = new Employee("Sylwek", "Mroz", 789, Departments.Szczecin, "00-1999");
+            var employee4 = new Employee("Marcin", "Rek", 963, Departments.Szczecin, "00-1588");
+
+            var phoneBook = new PhoneBook();
+
+            phoneBook.AddEmployee(employee);
+            phoneBook.AddEmployee(employee2);
+            phoneBook.AddEmployee(employee3);
+            phoneBook.AddEmployee(employee4);
+
+            foreach (var element in phoneBook.EmployeesFromLocation(Departments.Szczecin))
+                {
+                Console.WriteLine(element.Name);
+                }
+            }
+        }
     }
-}

@@ -15,8 +15,8 @@
             this.BadgeID = badgeId;
             this.Department = department;
             this.InternalPhone = internalPhone;
-            this.PrintBasicInfo();//TODO not needed
-            this.PrintFullInfo();//TODO not needed
+            this.PrintBasicInfo(); // TODO not needed
+            this.PrintFullInfo(); // TODO not needed
         }
 
         public string Name { get; }
@@ -31,15 +31,15 @@
 
         public string PrintFullInfo()
         {
-            //string fullInfoAboutEmployee = this.Name + " " + this.SurName + " " + this.BadgeID.ToString() + " " + this.Department + " " + this.InternalPhone;
-            //return fullInfoAboutEmployee;
+            ////string fullInfoAboutEmployee = this.Name + " " + this.SurName + " " + this.BadgeID.ToString() + " " + this.Department + " " + this.InternalPhone;
+            ////return fullInfoAboutEmployee;
             return $"{Name} {SurName} {BadgeID} {Department} {InternalPhone}";
         }
 
         public string PrintBasicInfo()
         {
-            //string fullInfoAboutEmployee = this.Name + " " + this.Department;
-            //return fullInfoAboutEmployee;
+            ////string fullInfoAboutEmployee = this.Name + " " + this.Department;
+            ////return fullInfoAboutEmployee;
             return $"{Name} {Department}";
         }
     }
