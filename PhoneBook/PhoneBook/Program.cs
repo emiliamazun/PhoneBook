@@ -8,28 +8,36 @@
 
     public class Program
     {
-        public static PhoneBook myPhoneBook = new PhoneBook();
+        private static PhoneBook myPhoneBook = new PhoneBook();
+
         public static void Main(string[] args)
         {
             SeedPhoneBookWithData();
             Console.WriteLine("Phone book");
             Console.WriteLine("-----------------------");
-            Console.WriteLine("Write Location or Quit");
+            Console.WriteLine("Write Location, Badge or Quit");
             string textFromLine;
-            while ((textFromLine = Console.ReadLine()) != null)
+            while (true)
             {
-                if(textFromLine=="Location")
+                textFromLine = Console.ReadLine();
+                var commands = textFromLine.Split(' ');
+                switch (commands[0])
                 {
-                    Console.WriteLine(ShowAllEmployees());
-                }
-                else if (textFromLine=="Quit")
-                {
-                    return;
-                }
+                    case "Location":
+                        AllEmployeesInLocation(commands[1]);
+                        break;
+                    case "Badge":
+                        DisplayEmployeeByBadgeId(commands[1]);
+                        break;
+                    case "Quit":
+                        return;
+                    default:
+                        Console.WriteLine("Unknown value");
+                        break;
+                }               
             }
-            Console.ReadLine();
-            return;
         }
+
         public static void SeedPhoneBookWithData()
         {
             var employee = new Employee("Bartek", "En", 123, Departments.Koszalin, "00-4567");
@@ -42,10 +50,21 @@
             myPhoneBook.AddEmployee(employee3);
             myPhoneBook.AddEmployee(employee4);
         }
+        
+        public static void DisplayEmployeeByBadgeId(string badgeId)
+        {
+            int parsedBadgeId = int.Parse(badgeId);
+            Console.WriteLine(myPhoneBook.GetEmployeeByBadgeId(parsedBadgeId).PrintFullInfo());
+        }
 
-        public static string ShowAllEmployees()
-        {            
-            
-        }        
+        private static void AllEmployeesInLocation(string location)
+        {
+            Departments parseDepartment;
+            Enum.TryParse(location, out parseDepartment);
+            var employeesFromLocation = myPhoneBook.EmployeesFromLocation(parseDepartment);
+            string result = string.Empty;
+            employeesFromLocation.ForEach(e => result += $"{ e.PrintFullInfo()}");
+            Console.WriteLine(result);
+        }
     }
 }
