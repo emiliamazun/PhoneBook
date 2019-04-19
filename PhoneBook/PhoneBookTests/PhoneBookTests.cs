@@ -11,34 +11,45 @@
     [TestFixture]
     public class PhoneBookTests
     {
+        private Employee myEmployee;
+
+       [SetUp]
+        public void SetUp()
+        {
+            this.myEmployee = new Employee("Emma", "Mazuni", 123, Departments.Koszalin, "00-4567");    
+        }
+
+        [TearDown]
+        public void TearDown()
+        {
+            Console.WriteLine("Finished");
+        }
+
         [Test]
         public void Employee_Check_All_Info()
         {
-            var employee = new Employee("Emma", "Mazuni", 123, Departments.Koszalin, "00-4567");
             Assert.Multiple(() =>
             {
-                Assert.That(employee.Name, Is.EqualTo("Emma"));
-                Assert.That(employee.SurName, Is.EqualTo("Mazuni"));
-                Assert.That(employee.BadgeID, Is.EqualTo(123));
-                Assert.That(employee.Department, Is.EqualTo(Departments.Koszalin));
-                Assert.That(employee.InternalPhone, Is.EqualTo("00-4567"));
+                Assert.That(myEmployee.Name, Is.EqualTo("Emma"));
+                Assert.That(myEmployee.SurName, Is.EqualTo("Mazuni"));
+                Assert.That(myEmployee.BadgeID, Is.EqualTo(123));
+                Assert.That(myEmployee.Department, Is.EqualTo(Departments.Koszalin));
+                Assert.That(myEmployee.InternalPhone, Is.EqualTo("00-4567"));
             });           
         }
 
         [Test]
         public void Employee_Check_Basic_Print()
         {
-            var employee = new Employee("Emma", "Mazuni", 123, Departments.Koszalin, "00-4567");
-            var employeeNameAndDepartment = employee.Name + " " + employee.Department;
-            Assert.That(employee.PrintBasicInfo(), Is.EqualTo(employeeNameAndDepartment));
+            var employeeNameAndDepartment = this.myEmployee.Name + " " + this.myEmployee.Department;
+            Assert.That(this.myEmployee.PrintBasicInfo(), Is.EqualTo(employeeNameAndDepartment));
         }
 
         [Test]
         public void Employee_Check_Full_Print()
         {
-            var employee = new Employee("Emma", "Mazuni", 123, Departments.Koszalin, "00-4567");
-            var employeeFullData = employee.Name + " " + employee.SurName + " " + employee.BadgeID.ToString() + " " + employee.Department + " " + employee.InternalPhone;
-            Assert.That(employee.PrintFullInfo(), Is.EqualTo(employeeFullData));
+            var employeeFullData = this.myEmployee.Name + " " + this.myEmployee.SurName + " " + this.myEmployee.BadgeID.ToString() + " " + this.myEmployee.Department + " " + this.myEmployee.InternalPhone;
+            Assert.That(this.myEmployee.PrintFullInfo(), Is.EqualTo(employeeFullData));
         }
 
         [Test]
